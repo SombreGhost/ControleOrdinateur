@@ -134,6 +134,3 @@ Université Cheikh Anta Diop de Dakar (UCAD)
 
 👉 **Contactez-nous si vous avez besoin de refaire le monde en Java !**
 
----
-
-Dis-moi si tu veux rajouter un logo UCAD ou une page de garde !
