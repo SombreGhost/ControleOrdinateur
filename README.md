@@ -1,104 +1,139 @@
-# ControleOrdinateur
+Bien sûr ! Voici un **README** clair et simple pour vous 3, en mode projet étudiant. Il est structuré pour que votre prof comprenne direct ce que vous avez fait, et que ça colle à ce qu'il attend.
 
-✅ README.md — Projet Client/Serveur Java
-Nom du projet : Contrôle distant d’un ordinateur (RCE - Remote Command Execution)
-Auteur(s) : Amadou Sall GUEYE, Zeynabou BA, Adja Sira DOUMBIYA
-Technologie : Java Standard Edition (Java SE)
+---
 
-📚 Description du projet
-Ce projet implémente une application client/serveur permettant à un client distant d’envoyer des commandes à un serveur et d’en recevoir le résultat.
-➡️ Le serveur écoute les connexions des clients et exécute les commandes système qu’il reçoit.
-➡️ Le client se connecte au serveur, envoie une commande et reçoit le résultat de l'exécution.
+# 🖥️ **Projet de Contrôle à Distance d'un Ordinateur**
+## Réalisé par :
+- Amadou Sall GUEYE  
+- Zeynabou BA  
+- Adja Sira DOUMBIYA
 
-C'est une solution de contrôle distant simplifiée, réalisée dans le cadre d'un projet universitaire en Programmation Orientée Objet (POO).
+---
 
-⚙️ Fonctionnalités
-Connexion TCP/IP entre client et serveur.
+## 🔥 **Description du projet**
+Ce projet consiste à développer une application client-serveur en Java, permettant **l'exécution de commandes distantes** sur un ordinateur serveur depuis un ordinateur client.  
+Le **client** envoie des commandes, et le **serveur** les exécute localement puis retourne le résultat.
 
-Exécution de commandes systèmes distantes.
+L'objectif est de **contrôler à distance** un poste via une connexion réseau TCP/IP tout en garantissant la simplicité d'utilisation et la robustesse.
 
-Affichage du résultat ou d’un message d’erreur.
+---
 
-Déconnexion propre du client.
+## ⚙️ **Fonctionnalités principales**
 
-Possibilité de gérer plusieurs clients connectés en parallèle (multi-threading sur le serveur).
+✅ Connexion **client-serveur** par socket (Java)  
+✅ **Envoi de commandes** depuis le client  
+✅ **Exécution locale** des commandes sur le serveur  
+✅ **Retour du résultat** ou des erreurs au client  
+✅ Gestion des **commandes invalides**  
+✅ Support des **commandes sur Windows et Linux**  
+✅ Saisie dynamique de l'**adresse IP** du serveur  
+✅ Fermeture propre de la connexion avec la commande `exit`
 
-🛠️ Technologies utilisées
-Java SE 8+
+---
 
-Sockets TCP
+## 📂 **Structure des fichiers**
 
-Multi-threading
+```
+/src
+  ├── Server.java   # Code du serveur
+  └── Client.java   # Code du client
+```
 
-ProcessBuilder pour l’exécution de commandes système
+---
 
-Communication via flux de caractères (BufferedReader, PrintWriter)
+## 🚀 **Prérequis pour exécuter le projet**
+- Java Development Kit (JDK) 8 ou supérieur  
+- Deux machines (ou une machine + VM) sur le même réseau  
+- (Facultatif) Pare-feu configuré pour autoriser le port 5000 si distant
 
-🖥️ Architecture
-lua
-Copy
-Edit
-+-------------+          TCP/IP         +---------------+
-|   Client    |  <------------------->  |    Serveur    |
-| Interface   |                        | Écoute socket  |
-| Commande    |                        | Exécution CMD  |
-| Résultat    |                        | Renvoi résultat|
-+-------------+                        +---------------+
-🚀 Installation & Lancement
-1. Prérequis
-JDK 8 ou supérieur
+---
 
-Deux machines OU une machine locale avec deux terminaux (client + serveur)
+## 🛠️ **Installation et exécution**
 
-2. Lancement du serveur
-Compile le serveur :
-
-bash
-Copy
-Edit
+### 1. Compiler les programmes
+Dans un terminal, placez-vous dans le dossier contenant les fichiers `.java` :  
+```bash
 javac Server.java
-Lance le serveur (par défaut sur le port 5000) :
-
-bash
-Copy
-Edit
-java Server
-3. Lancement du client
-Compile le client :
-
-bash
-Copy
-Edit
 javac Client.java
-Lance le client et renseigne l'IP du serveur :
+```
 
-bash
-Copy
-Edit
+### 2. Lancer le serveur
+Sur la machine serveur (ou VM) :  
+```bash
+java Server
+```
+
+### 3. Lancer le client
+Sur la machine cliente :  
+```bash
 java Client
-➡️ Exemple : tape 127.0.0.1 pour un test local, ou l'adresse IP d'une VM sur le réseau.
+```
 
-✅ Comment utiliser
-Le client demande une commande à exécuter.
-➤ Exemple : dir (Windows) ou ls (Linux).
+- Vous devrez **entrer l'adresse IP** du serveur (ex : `192.168.1.10`)
+- Puis, taper des commandes système (exemple : `ls` sous Linux ou `dir` sous Windows)
 
-Le serveur exécute cette commande et retourne le résultat.
+---
 
-Tape exit pour fermer la connexion.
+## 📝 **Utilisation**
 
-🔒 Remarques sur la sécurité
-Ce projet est à but pédagogique. En conditions réelles, il faut :
+- Tapez vos commandes dans le **client**.  
+  Exemples :  
+  - `dir` (Windows)  
+  - `ls -l` (Linux/MacOS)  
+  - `ipconfig` ou `ifconfig`  
+  - `whoami`  
+- Pour **quitter proprement**, tapez la commande :  
+  ```
+  exit
+  ```
 
-Ajouter de l’authentification (login/mot de passe).
+---
 
-Sécuriser les communications (SSL/TLS).
+## ✅ **Tests effectués**
 
-Limiter les commandes à exécuter.
+| **Test**                    | **Résultat attendu**                  | **Résultat** |
+|-----------------------------|---------------------------------------|--------------|
+| Connexion client-serveur     | OK, connexion établie                | ✅ OK |
+| Exécution commande `dir`     | Liste des fichiers                   | ✅ OK |
+| Exécution commande invalide  | Message d'erreur affiché au client   | ✅ OK |
+| Longues sorties (`ps aux`)   | Affichage complet sur le client      | ✅ OK |
+| Fermeture propre (`exit`)    | Déconnexion sans erreurs             | ✅ OK |
 
-👨‍💻 Auteurs
-Amadou Sall GUEYE
+---
 
-Collaborateurs 
+## 🛡️ **Sécurité**
+- Limitation aux **commandes shell** : uniquement via le terminal système.
+- Le serveur **n'exécute rien automatiquement**, il attend les commandes du client.
+- Gestion des erreurs d'exécution et des commandes non valides.
 
-Adja Sira DOUMBIYA
-Zeynabou BA
+---
+
+## 📚 **Auteurs**
+- Amadou Sall GUEYE  
+- Zeynabou BA  
+- Adja Sira DOUMBIYA  
+
+Filière : Master 1 - Génie Logiciel  
+Université Cheikh Anta Diop de Dakar (UCAD)  
+École Supérieure Polytechnique
+
+---
+
+## 📅 **Date de rendu**  
+23 mars 2025
+
+---
+
+## ⚡ **Améliorations futures (perspectives)**
+- Interface graphique (GUI) pour rendre le contrôle plus user-friendly  
+- Authentification sécurisée des clients  
+- Journalisation des commandes et résultats  
+- Gestion de multiples clients simultanés avec file d’attente  
+
+---
+
+👉 **Contactez-nous si vous avez besoin de refaire le monde en Java !**
+
+---
+
+Dis-moi si tu veux rajouter un logo UCAD ou une page de garde !
